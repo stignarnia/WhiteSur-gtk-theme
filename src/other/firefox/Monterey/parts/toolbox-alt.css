@@ -32,11 +32,6 @@
 	background: var(--gnome-inactive-toolbar-background) !important;
 }
 
-/* Toolbox colors */
-#navigator-toolbox {
-	background: none !important;
-}
-
 .toolbarbutton-icon {
 	color: var(--gnome-toolbar-color);
 	fill: var(--gnome-toolbar-color);
@@ -55,7 +50,7 @@
 }
 
 /* allow to drag headerbar empty space */
-:root[tabsintitlebar] #nav-bar .chromeclass-location {
+#nav-bar .chromeclass-location {
 	-moz-window-dragging: drag !important;
 }
 

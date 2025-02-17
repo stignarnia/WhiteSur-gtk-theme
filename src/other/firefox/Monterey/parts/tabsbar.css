@@ -46,7 +46,8 @@
 
 .tab-background {
 	background: transparent !important;
-	transition: background 200ms !important;
+	transition: background-color 200ms !important;
+	outline: none !important;
 }
 
 #TabsToolbar .tab-background {
@@ -249,6 +250,7 @@ tab[selected]:-moz-window-inactive .tab-label {
 #firefox-view-button > .toolbarbutton-icon {
 	filter: none !important;
 	box-shadow: none !important;
+	outline: none !important;
 }
 
 /* Remove shadow next to tab scroll buttons */

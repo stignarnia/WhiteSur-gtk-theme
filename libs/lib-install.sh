@@ -670,7 +670,11 @@ install_firefox_theme() {
     local TARGET_DIR="${FIREFOX_THEME_DIR}"
   fi
 
-  local theme_type="${darker}${adaptive}${colorscheme}"
+  if [[ "${colorscheme}" == '-nord' && "${adaptive}" == '-adaptive' ]]; then
+    local theme_type="${adaptive}"
+  else
+    local theme_type="${darker}${adaptive}${colorscheme}"
+  fi
 
   remove_firefox_theme
 
@@ -682,11 +686,13 @@ install_firefox_theme() {
   [[ -f "${TARGET_DIR}"/customChrome.css ]] && mv "${TARGET_DIR}"/customChrome.css            "${TARGET_DIR}"/customChrome.css.bak
   cp -rf "${FIREFOX_SRC_DIR}"/customChrome.css                                                "${TARGET_DIR}"
   cp -rf "${FIREFOX_SRC_DIR}"/common/{icons,pages}                                            "${TARGET_DIR}/${theme_name}"
+
   if [[ "${colorscheme}" == '-nord' ]]; then
     cp -rf "${FIREFOX_SRC_DIR}"/common/titlebuttons-nord                                      "${TARGET_DIR}/${theme_name}"/titlebuttons
   else
     cp -rf "${FIREFOX_SRC_DIR}"/common/titlebuttons                                           "${TARGET_DIR}/${theme_name}"
   fi
+
   cp -rf "${FIREFOX_SRC_DIR}"/common/*.css                                                    "${TARGET_DIR}/${theme_name}"
   cp -rf "${FIREFOX_SRC_DIR}"/common/parts/*.css                                              "${TARGET_DIR}/${theme_name}"/parts
   [[ -f "${TARGET_DIR}"/userChrome.css ]] && mv "${TARGET_DIR}"/userChrome.css                "${TARGET_DIR}"/userChrome.css.bak
@@ -767,7 +773,7 @@ remove_firefox_theme() {
   [[ -f "${TARGET_DIR}"/userChrome.css && ! -f "${TARGET_DIR}"/userChrome.css.bak ]] && cp -r "${TARGET_DIR}"/userChrome.css "${TARGET_DIR}"/userChrome.css.bak
   [[ -f "${TARGET_DIR}"/userContent.css && ! -f "${TARGET_DIR}"/userContent.css.bak ]] && cp -r "${TARGET_DIR}"/userContent.css "${TARGET_DIR}"/userContent.css.bak
 
-  rm -rf "${TARGET_DIR}/${THEME_NAME}"
+  rm -rf "${TARGET_DIR}/${theme_name}"
   rm -rf "${TARGET_DIR}"/customChrome.css
   rm -rf "${TARGET_DIR}"/userChrome.css
   rm -rf "${TARGET_DIR}"/userContent.css
